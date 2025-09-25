@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipes | Keep it Healthy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9fdf9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    header {
+      background: linear-gradient(to right, #4CAF50, #66BB6A);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 60px 20px;
+      text-align: center;
+      background: linear-gradient(to right, #43A047, #81C784);
+      color: white;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    /* Recipe Search */
+    .recipe-search {
+      text-align: center;
+      margin: 40px 20px;
+    }
+    .recipe-search input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .recipe-search button {
+      padding: 10px 20px;
+      background-color: #FF9800;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    .recipe-search button:hover {
+      background-color: #e68900;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 80px auto;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+      color: #4CAF50;
+    }
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+    }
+    .close:hover {
+      color: #333;
+    }
+    ul, ol {
+      text-align: left;
+      margin-left: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(to right, #2196F3, #42A5F5);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <h1>Keep it Healthy</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="recipes.html">Recipes</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Discover Healthy Recipes</h2>
+    <p>Type the name of a dish to get its full recipe, calories, and diet notes 🍏</p>
+  </section>
+
+  <!-- Recipe Search -->
+  <div class="recipe-search">
+    <input type="text" id="recipe-name" placeholder="اكتب اسم الأكلة">
+    <button onclick="showRecipe()">Show Recipe</button>
+  </div>
+
+  <!-- Recipe Modal -->
+  <div id="recipe-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('recipe-modal')">&times;</span>
+      <h2 id="recipe-title"></h2>
+      <p id="recipe-calories"></p>
+      <h3>المكونات:</h3>
+      <ul id="recipe-ingredients"></ul>
+      <h3>طريقة التحضير:</h3>
+      <ol id="recipe-steps"></ol>
+      <p id="recipe-notes"></p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Keep it Healthy. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const recipes = [
+      {
+        name: "سلطة خضار مع دجاج مشوي",
+        calories: "250 Cal لكل حصة",
+        ingredients: ["خس", "طماطم", "خيار", "دجاج مشوي 100 جم", "زيت زيتون 1 ملعقة"],
+        steps: ["قطع الخضار", "شوي الدجاج", "اخلط المكونات", "أضف الزيت والملح حسب الرغبة"],
+        notes: "مناسبة للدايت ومنخفضة الكربوهيدرات"
+      },
+      {
+        name: "شوربة عدس قليلة الدسم",
+        calories: "180 Cal لكل حصة",
+        ingredients: ["عدس 100 جم", "بصل", "جزر", "ملح وفلف"],
+        steps: ["سلق العدس والخضار", "ضبط التوابل حسب الرغبة", "اخلط المكونات حتى تصبح شوربة ناعمة"],
+        notes: "شوربة منخفضة السعرات ومثالية للدايت"
+      },
+      {
+        name: "سموذي سبانخ وفواكه",
+        calories: "150 Cal لكل كوب",
+        ingredients: ["سبانخ", "موز", "تفاح", "حليب لوز 200 مل"],
+        steps: ["ضع جميع المكونات في الخلاط", "اخلط حتى تصبح ناعمة", "صب في كوب واستمتع"],
+        notes: "غني بالفيتامينات ومناسب للفطور الصحي"
+      }
+    ];
+
+    function showRecipe() {
+      const input = document.getElementById('recipe-name').value.trim();
+      const recipe = recipes.find(r => r.name === input);
+
+      if(recipe) {
+        document.getElementById('recipe-title').innerText = recipe.name;
+        document.getElementById('recipe-calories').innerText = recipe.calories;
+        
+        const ingredientsList = document.getElementById('recipe-ingredients');
+        ingredientsList.innerHTML = '';
+        recipe.ingredients.forEach(i => {
+          const li = document.createElement('li');
+          li.textContent = i;
+          ingredientsList.appendChild(li);
+        });
+
+        const stepsList = document.getElementById('recipe-steps');
+        stepsList.innerHTML = '';
+        recipe.steps.forEach(s => {
+          const li = document.createElement('li');
+          li.textContent = s;
+          stepsList.appendChild(li);
+        });
+
+        document.getElementById('recipe-notes').innerText = recipe.notes;
+
+        document.getElementById('recipe-modal').style.display = 'block';
+      } else {
+        alert("الوصفة غير موجودة! تأكد من كتابة الاسم بالكامل");
+      }
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // اغلاق المودال عند الضغط خارج المحتوى
+    window.onclick = function(event) {
+      const modal = document.getElementById('recipe-modal');
+      if(event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

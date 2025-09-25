@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features | Keep it Healthy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-image: url('risen-wang-20jX9b35r_M-unsplash.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Navbar */
+    header {
+      background-color: rgba(76, 175, 80, 0.95);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header .logo-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header img.logo {
+      height: 50px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: white;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #FF9800;
+    }
+
+    /* Features Container */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-item {
+      display: block;
+      text-decoration: none;
+      background: #fefefe;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      color: #333;
+    }
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #4CAF50;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 12px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .badge.free { background: #4CAF50; color: #fff; }
+    .badge.premium { background: #FF9800; color: #fff; }
+
+    /* Footer */
+    footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    footer img {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    footer h2 {
+      margin: 5px 0;
+    }
+    footer p {
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+    footer .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    footer .social-icons a:hover {
+      color: #FF9800;
+    }
+
+    /* Animations */
+    @keyframes fadeIn { to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo-name">
+      <img src="image10.png" alt="Keep it Healthy Logo" class="logo">
+      <h1>Keep it Healthy</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="about.html">About</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Features Section -->
+  <div class="container">
+    <h2>Our Features</h2>
+    <div class="features-grid">
+      <a href="personalized.html" class="feature-item">
+        <div class="feature-icon"><i class="fas fa-calculator"></i></div>
+        <h3>Calorie Tracker <span class="badge free">FREE</span></h3>
+        <p>Basic calorie calculator and healthy plan to start your journey.</p>
+      </a>
+
+      <a href="workout.html" class="feature-item">
+        <div class="feature-icon"><i class="fas fa-dumbbell"></i></div>
+        <h3>Custom Workouts <span class="badge premium">PREMIUM</span></h3>
+        <p>Personalized workout plans to match your fitness level.</p>
+      </a>
+
+      <a href="target.html" class="feature-item">
+        <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+        <h3>Targeted Diets <span class="badge premium">PREMIUM</span></h3>
+        <p>Specialized meal plans for conditions like diabetes and weight goals.</p>
+      </a>
+
+      <a href="shopping.html" class="feature-item">
+        <div class="feature-icon"><i class="fas fa-shopping-basket"></i></div>
+        <h3>Healthy Shopping <span class="badge premium">PREMIUM</span></h3>
+        <p>Buy diet-friendly products and supplements directly from our store.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <img src="image10.png" alt="Keep it Healthy Logo">
+      <h2>Keep it Healthy</h2>
+      <p>Empowering your journey to a healthier lifestyle.</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2025 Keep it Healthy. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

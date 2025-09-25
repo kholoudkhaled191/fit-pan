@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscribe | Keep it Healthy</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family: Arial, sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background-image:url('risen-wang-20jX9b35r_M-unsplash.jpg');
+  background-size:cover;
+  background-position:center;
+  color:#333;
+}
+/* Navbar */
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background-color:#4CAF50;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+header .logo-name { display:flex; align-items:center; gap:10px; }
+header .logo-name img { height:50px; }
+header .logo-name h1 { font-size:1.5rem; color:white; }
+nav a { color:white; margin:0 15px; text-decoration:none; font-weight:600; }
+nav a:hover { color:#FF9800; }
+
+/* Subscription Section */
+.subscription-section {
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+}
+.subscription-form-container {
+  background: rgba(255,255,255,0.97);
+  padding:40px;
+  border-radius:20px;
+  width:90%;
+  max-width:600px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+.subscription-form-container h2 {
+  font-size:1.8rem;
+  color:#4CAF50;
+  text-align:center;
+  margin-bottom:25px;
+}
+.subscription-form { display:grid; gap:12px; }
+.subscription-form label { display:flex; flex-direction:column; font-weight:600; }
+.subscription-form input, .subscription-form select { padding:10px; border-radius:8px; border:1px solid #ccc; font-size:0.95rem; }
+
+.package-section { margin-top:10px; }
+.package-section select { padding:10px; border-radius:8px; border:1px solid #ccc; font-size:1rem; }
+.price-display { margin-top:8px; font-weight:700; font-size:1.2rem; color:#FF9800; text-align:center; }
+
+/* Payment */
+.payment-methods {
+  display:flex; gap:12px; margin-top:15px; flex-wrap:wrap; justify-content:center;
+}
+.payment-methods label {
+  flex:1; min-width:100px; padding:12px; background:#f0f0f0;
+  border-radius:12px; text-align:center; cursor:pointer;
+  border:2px solid transparent; transition:all 0.3s ease;
+  display:flex; align-items:center; justify-content:center; gap:8px; font-weight:600;
+}
+.payment-methods input:checked + label {
+  border-color:#FF9800; background:#fff3e0;
+  transform:scale(1.05); box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn {
+  background-color:#FF9800; color:white; padding:12px 30px; border:none; border-radius:25px;
+  font-weight:600; cursor:pointer; margin-top:20px; transition:all 0.3s ease;
+}
+.btn:hover {
+  background-color:#e68900; transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.confirmation {
+  margin-top:20px;
+  padding:15px;
+  background:#e8f5e9;
+  border-radius:12px;
+  text-align:center;
+  font-size:1rem;
+  color:#2e7d32;
+  display:none;
+}
+
+footer {
+  background-color:#4CAF50;
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+}
+footer .footer-logo { display:flex; flex-direction:column; align-items:center; gap:10px; margin-bottom:20px; }
+footer .footer-logo img { height:60px; }
+footer .social-icons a { color:white; margin:0 10px; font-size:1.5rem; text-decoration:none; }
+footer .social-icons a:hover { color:#FF9800; }
+
+@media(max-width:600px){
+  header { flex-direction:column; gap:10px; padding:12px 20px; }
+  nav { display:flex; flex-direction:column; gap:8px; align-items:center; }
+  .subscription-form-container { padding:25px; width:95%; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-name">
+    <img src="image10.png" alt="Logo">
+    <h1>Keep it Healthy</h1>
+  </div>
+  <nav>
+    <a href="home.php">Home</a>
+    <a href="about.html">About</a>
+    <a href="features.html">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="subscription-section">
+  <div class="subscription-form-container">
+    <h2>Subscribe to Meal Delivery</h2>
+    <form class="subscription-form" id="subscribeForm">
+      <label>Full Name <input type="text" id="fullname" required></label>
+      <label>Age <input type="number" id="age" min="1" required></label>
+      <label>Weight (kg) <input type="number" id="weight" min="1" step="0.1" required></label>
+      <label>Email <input type="email" id="email" required></label>
+      <label>Phone Number <input type="tel" id="phone" required></label>
+      <label>Work Address <input type="text" id="workAddress" required></label>
+      <label>Work Start Time <input type="time" id="workStart" required></label>
+      <label>Work End Time <input type="time" id="workEnd" required></label>
+
+      <div class="package-section">
+        <label>Select Package:
+          <select id="mealPackage" required>
+            <option value="" disabled selected>Select your package</option>
+            <option value="breakfast">Breakfast Only - 50 EGP</option>
+            <option value="lunch">Lunch Only - 150 EGP</option>
+            <option value="dinner">Dinner Only - 250 EGP</option>
+            <option value="breakfast_dinner">Breakfast + Dinner - 300 EGP</option>
+            <option value="all_meals">All Meals - 450 EGP</option>
+          </select>
+        </label>
+        <div class="price-display" id="priceDisplay">Price: — EGP</div>
+      </div>
+
+      <div class="payment-methods">
+        <input type="radio" id="card" name="payment" value="card" checked>
+        <label for="card"><i class="fas fa-credit-card"></i> Card</label>
+        <input type="radio" id="paypal" name="payment" value="paypal">
+        <label for="paypal"><i class="fab fa-paypal"></i> PayPal</label>
+        <input type="radio" id="fawry" name="payment" value="fawry">
+        <label for="fawry"><i class="fas fa-money-bill"></i> Fawry</label>
+      </div>
+
+      <label id="cardNumberLabel">Card/PayPal Number <input type="text" id="fakeNumber" placeholder="1234 5678 9012 3456"></label>
+
+      <button type="button" class="btn" onclick="handlePayment()">Subscribe</button>
+    </form>
+
+    <div class="confirmation" id="confirmation">
+      <h3>Subscription Successful!</h3>
+      <p id="confirmation-message"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <img src="image10.png" alt="Logo">
+    <h2>Keep it Healthy</h2>
+  </div>
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+  </div>
+  <p>&copy; 2025 Keep it Healthy. All Rights Reserved.</p>
+</footer>
+
+<script>
+const mealPackage = document.getElementById('mealPackage');
+const priceDisplay = document.getElementById('priceDisplay');
+const paymentRadios = document.querySelectorAll('input[name="payment"]');
+const cardNumberLabel = document.getElementById('cardNumberLabel');
+
+const packagePrices = {
+  breakfast:50,
+  lunch:150,
+  dinner:250,
+  breakfast_dinner:300,
+  all_meals:450
+};
+
+mealPackage.addEventListener('change', () => {
+  const val = mealPackage.value;
+  priceDisplay.textContent = 'Price: ' + packagePrices[val] + ' EGP';
+});
+
+paymentRadios.forEach(radio => {
+  radio.addEventListener('change', () => {
+    if(radio.value === 'fawry'){
+      cardNumberLabel.style.display='none';
+    } else {
+      cardNumberLabel.style.display='block';
+    }
+  });
+});
+
+function handlePayment() {
+  const fullname = document.getElementById('fullname').value;
+  const age = document.getElementById('age').value;
+  const weight = document.getElementById('weight').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const workAddress = document.getElementById('workAddress').value;
+  const workStart = document.getElementById('workStart').value;
+  const workEnd = document.getElementById('workEnd').value;
+  const selectedPackage = mealPackage.value;
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+  const fakeNumber = document.getElementById('fakeNumber').value;
+
+  if(!fullname || !age || !weight || !email || !phone || !workAddress || !workStart || !workEnd || !selectedPackage){
+    alert('Please fill all required fields');
+    return;
+  }
+
+  if((payment==='card' || payment==='paypal') && !fakeNumber){
+    alert('Please enter your card/PayPal number');
+    return;
+  }
+
+  // حفظ البيانات في localStorage
+  localStorage.setItem('subscriptionData', JSON.stringify({fullname, age, weight, email, phone, workAddress, workStart, workEnd, selectedPackage, payment, fakeNumber}));
+
+  document.getElementById('subscribeForm').style.display='none';
+  document.getElementById('confirmation').style.display='block';
+
+  let message = '';
+  if(payment==='fawry'){
+    message = 'Thank you! Please visit a Fawry outlet and use this reference code: <strong>123456789</strong>. Redirecting...';
+  } else {
+    message = `Thank you! Your payment number <strong>${fakeNumber}</strong> is saved. Redirecting...`;
+  }
+  document.getElementById('confirmation-message').innerHTML=message;
+
+  setTimeout(()=>{ window.location.href='dashboard.html'; },3000);
+}
+</script>
+
+</body>
+</html>

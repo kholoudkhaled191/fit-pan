@@ -1,0 +1,242 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe | Keep it Healthy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+  body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* الخلفية */
+  background-image: url('image.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+    /* Navbar */
+    header {
+      background-color: rgba(76, 175, 80, 0.95);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    nav a {
+      color: white; 
+      margin: 0 10px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Subscription Form Section */
+    .subscription-section {
+      margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 35px 30px;
+      text-align: center;
+      width: 90%;
+      max-width: 450px;
+      border-radius: 20px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+      font-size: 0.95rem;           
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .subscription-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: #4CAF50;
+    }
+    .subscription-form label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 500;
+      text-align: left;
+    }
+    .subscription-form input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: border 0.3s;
+    }
+    .subscription-form input:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    .payment-methods {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    .payment-methods label {
+      flex: 1;
+      padding: 10px 12px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+    .payment-methods input {
+      display: none;
+    }
+    .payment-methods input:checked + label {
+      border-color: #FF9800;
+      background: #fff3e0;
+      font-weight: bold;
+    }
+
+    .btn {
+      background-color: #FF9800;
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+      width: 100%;
+    }
+    .btn:hover {
+      background-color: #e68900;
+    }
+
+    .confirmation {
+      margin-top: 20px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 1rem;
+      color: #2e7d32;
+      display: none;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    footer {
+      background-color: rgba(33, 150, 243, 0.9);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: auto;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+   Navbar -->
+  <header>
+    <h1>Keep it Healthy</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="personalized.html">Personalized Plan</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Subscription Form -->
+  <section class="subscription-section">
+    <h2>Subscribe to Meal Delivery</h2>
+    <form class="subscription-form" id="subscribeForm">
+      <label>Full Name
+        <input type="text" id="fullname" required placeholder="Your Name">
+      </label>
+      <label>Email
+        <input type="email" id="email" required placeholder="you@example.com">
+      </label>
+      <label>Phone Number
+        <input type="tel" id="phone" required placeholder="+20 10 0000 0000">
+      </label>
+      <label>Work Start Time
+        <input type="time" id="workStart" required>
+      </label>
+      <label>Work End Time
+        <input type="time" id="workEnd" required>
+      </label>
+      <label>Location
+        <input type="text" id="workLocation" required placeholder="Exact location">
+      </label>
+
+      <div class="payment-methods">
+        <input type="radio" id="card" name="payment" value="card" checked>
+        <label for="card"><i class="fas fa-credit-card"></i> Card</label>
+        <input type="radio" id="fawry" name="payment" value="fawry">
+        <label for="fawry"><i class="fas fa-money-bill"></i> Fawry</label>
+        <input type="radio" id="paypal" name="payment" value="paypal">
+        <label for="paypal"><i class="fab fa-paypal"></i> PayPal</label>
+      </div>
+
+      <button type="button" class="btn" onclick="subscribe()">Subscribe</button>
+    </form>
+    <div class="confirmation" id="confirmation">
+      <h3>Subscription Successful!</h3>
+      <p>Thank you for subscribing. Your personalized meal delivery will start according to your work schedule.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Keep it Healthy. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function subscribe() {
+      const fullname = document.getElementById('fullname').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const workStart = document.getElementById('workStart').value;
+      const workEnd = document.getElementById('workEnd').value;
+      const workLocation = document.getElementById('workLocation').value;
+      const payment = document.querySelector('input[name="payment"]:checked').value;
+
+      if (!fullname || !email || !phone || !workStart || !workEnd || !workLocation) {
+        alert("Please fill all required fields");
+        return;
+      }
+
+      document.getElementById('subscribeForm').style.display = 'none';
+      document.getElementById('confirmation').style.display = 'block';
+
+      console.log({
+        fullname, email, phone, workStart, workEnd, workLocation, payment
+      });
+    }
+  </script>
+
+</body>
+</html> 

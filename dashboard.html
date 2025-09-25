@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Keep it Healthy</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family: Arial, sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background: url('risen-wang-20jX9b35r_M-unsplash.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color:#333;
+}
+header {
+  background-color: rgba(76, 175, 80, 0.95);
+  color: white;
+  padding: 15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+header .logo-name { display:flex; align-items:center; gap:10px; }
+header img.logo { height:50px; }
+header h1 { margin:0; font-size:1.5rem; color:white; }
+nav a { color:white; margin:0 15px; text-decoration:none; font-size:1rem; transition:0.3s; }
+nav a:hover { color:#FF9800; }
+
+.dashboard-section { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:20px; }
+.dashboard-container {
+  background: rgba(255,255,255,0.95);
+  padding:30px;
+  text-align:center;
+  width:95%;
+  max-width:700px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  font-size:1rem;
+}
+.dashboard-container h2 { color:#4CAF50; margin-bottom:25px; font-size:1.8rem; }
+.dashboard-container h3 { margin:20px 0 10px; color:#333; }
+.user-details p { margin:6px 0; font-size:1rem; }
+
+.meals { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:20px; }
+.meal-card {
+  background:#e8f5e9;
+  flex:1 1 200px;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  transition:transform 0.3s ease;
+}
+.meal-card:hover { transform:translateY(-5px); }
+.meal-card h4 { margin-bottom:10px; color:#2e7d32; font-size:1.2rem; }
+.meal-card p { margin:5px 0; font-weight:500; }
+
+.btn { background-color:#FF9800; color:white; padding:12px 25px; border:none; border-radius:25px; font-size:1rem; font-weight:600; cursor:pointer; margin-top:20px; display:inline-block; transition:all 0.3s ease; }
+.btn:hover { background-color:#e68900; transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+
+.notifications, .delivery-status { margin-top:20px; padding:15px; border-radius:12px; text-align:center; font-size:1rem; }
+.notifications { background:#fff3e0; color:#e65100; }
+.delivery-status { background:#e3f2fd; color:#1565c0; }
+
+footer {
+  background-color:#4CAF50;
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+}
+footer img { height:60px; margin-bottom:10px; }
+footer h2 { margin:5px 0; }
+footer p { margin:10px 0; font-size:1.1rem; }
+footer .social-icons a { color:white; margin:0 10px; font-size:1.5rem; text-decoration:none; }
+footer .social-icons a:hover { color:#FF9800; }
+
+@media (max-width:600px){
+  .meals { flex-direction:column; }
+  header { flex-direction:column; gap:10px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-name">
+    <img src="image10.png" alt="Logo" class="logo">
+    <h1>Keep it Healthy</h1>
+  </div>
+  <nav>
+    <a href="subscribe.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="about.html">About</a>
+    <a href="#footer">Contact</a>
+  </nav>
+</header>
+
+<section class="dashboard-section">
+  <div class="dashboard-container">
+    <h2>Your Subscription Dashboard</h2>
+    <div class="user-details">
+      <h3>Your Details</h3>
+      <p><strong>Name:</strong> <span id="dash-fullname"></span></p>
+      <p><strong>Age:</strong> <span id="dash-age"></span></p>
+      <p><strong>Weight:</strong> <span id="dash-weight"></span> kg</p>
+      <p><strong>Email:</strong> <span id="dash-email"></span></p>
+      <p><strong>Phone:</strong> <span id="dash-phone"></span></p>
+      <p><strong>Work Address:</strong> <span id="dash-workAddress"></span></p>
+      <p><strong>Work Hours:</strong> <span id="dash-workHours"></span></p>
+    </div>
+
+    <div class="meals">
+      <div class="meal-card">
+        <h4>Breakfast</h4>
+        <p id="dash-breakfast"></p>
+        <p>Time: <span id="dash-breakfastTime"></span></p>
+      </div>
+      <div class="meal-card">
+        <h4>Lunch</h4>
+        <p id="dash-lunch"></p>
+        <p>Time: <span id="dash-lunchTime"></span></p>
+      </div>
+      <div class="meal-card">
+        <h4>Dinner</h4>
+        <p id="dash-dinner"></p>
+        <p>Time: <span id="dash-dinnerTime"></span></p>
+      </div>
+    </div>
+
+    <div class="notifications">
+      <h3>Notifications</h3>
+      <ul id="notification-list"></ul>
+    </div>
+
+    <div class="delivery-status" id="delivery-status">
+      <p>Your next meal is being prepared.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+    <img src="image10.png" alt="Logo">
+    <h2>Keep it Healthy</h2>
+    <p>Empowering your journey to a healthier lifestyle.</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>&copy; 2025 Keep it Healthy. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+// جلب بيانات المستخدم من localStorage
+const userData = JSON.parse(localStorage.getItem('subscriptionData')) || {};
+
+document.getElementById('dash-fullname').textContent = userData.fullname || 'N/A';
+document.getElementById('dash-age').textContent = userData.age || 'N/A';
+document.getElementById('dash-weight').textContent = userData.weight || 'N/A';
+document.getElementById('dash-email').textContent = userData.email || 'N/A';
+document.getElementById('dash-phone').textContent = userData.phone || 'N/A';
+document.getElementById('dash-workAddress').textContent = userData.workAddress || 'N/A';
+document.getElementById('dash-workHours').textContent = `${userData.workStart || 'N/A'} - ${userData.workEnd || 'N/A'}`;
+
+document.getElementById('dash-breakfastTime').textContent = userData.workStart || '08:00';
+document.getElementById('dash-lunchTime').textContent = '13:00';
+document.getElementById('dash-dinnerTime').textContent = userData.workEnd || '20:00';
+
+// وجبات اليوم
+const meals = {
+  breakfast: 'Oatmeal with Fruits',
+  lunch: 'Grilled Chicken Salad',
+  dinner: 'Salmon with Quinoa'
+};
+
+document.getElementById('dash-breakfast').textContent = meals.breakfast;
+document.getElementById('dash-lunch').textContent = meals.lunch;
+document.getElementById('dash-dinner').textContent = meals.dinner;
+
+// notifications + delivery status
+function updateNotifications() {
+  const notificationList = document.getElementById('notification-list');
+  const deliveryStatus = document.getElementById('delivery-status');
+
+  notificationList.innerHTML = `
+    <li>Your breakfast (${meals.breakfast}) is ready!</li>
+    <li>Your lunch (${meals.lunch}) is ready!</li>
+    <li>Your dinner (${meals.dinner}) is ready!</li>
+  `;
+  deliveryStatus.innerHTML = `<p>All meals are prepared and ready for delivery!</p>`;
+}
+
+updateNotifications();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keep it Healthy — Daily Progress</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --green:#4CAF50; --orange:#FF9800; --blue:#2196F3; --bg:#F5F7F6;
+      --card:#ffffff; --muted:#6b7280; --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body {
+      margin:0;
+      font-family:Arial, sans-serif;
+      background: url('risen-wang-20jX9b35r_M-unsplash.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color:#102a43;
+      -webkit-font-smoothing:antialiased;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+    /* Navbar */
+    header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 22px;
+      background:linear-gradient(90deg,var(--green),#66bb6a);
+      color:white;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header .logo-name {
+      display:flex; align-items:center; gap:10px;
+    }
+    header .logo-name img { height:40px; }
+    header h1 { font-size:1.5rem; margin:0; color:white; }
+    header nav a { color:white; text-decoration:none; margin-left:16px; font-weight:600; }
+    header nav a:hover { text-decoration:underline; }
+
+    /* Wrap & Layout */
+    .wrap{max-width:1200px;margin:18px auto;padding:12px}
+    .top{display:flex;gap:18px;flex-wrap:wrap}
+    .left{flex:1;min-width:320px}
+    .right{width:360px;min-width:280px}
+    .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 6px 20px rgba(15,23,42,0.06);margin-bottom:16px}
+    h2{margin:0 0 8px;font-size:1.05rem;color:var(--green)}
+    .muted{color:var(--muted)}
+    .entry-form label{display:block;margin:8px 0 6px;font-weight:600}
+    .entry-form input, .entry-form select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef0}
+    .entry-row{display:flex;gap:8px}
+    .entry-row > *{flex:1}
+    .btn{display:inline-block;background:var(--green);color:white;padding:10px 14px;border-radius:999px;border:none;cursor:pointer;font-weight:700}
+    .btn.secondary{background:var(--orange)}
+    .small{font-size:0.9rem;padding:8px 10px;border-radius:8px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .day-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+    .day-card{padding:12px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfff9);box-shadow:0 6px 12px rgba(0,0,0,0.04);position:relative;overflow:hidden}
+    .day-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .badge-pill{padding:6px 10px;border-radius:999px;font-weight:700;color:white;font-size:0.85rem}
+    .charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:14px}
+    canvas{background:transparent;border-radius:8px}
+    .badges{display:flex;flex-direction:column;gap:10px}
+    .badge-item{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,#fff,#f7fff7);padding:8px;border-radius:10px;border:1px dashed #dfeee0}
+    .summary {display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+
+    /* Footer */
+    footer{background-color:#4CAF50;color:white;text-align:center;padding:40px 20px;margin-top:24px}
+    footer img {height:60px; margin-bottom:10px;}
+    footer h2 {margin:5px 0;}
+    footer p {margin:10px 0; font-size:1.1rem;}
+    footer .social-icons a {color:white; margin:0 10px; font-size:1.5rem; text-decoration:none;}
+    footer .social-icons a:hover {color:#FF9800;}
+
+    @media(max-width:940px){.right{width:100%}}
+    @media(max-width:600px){header nav{display:none}.summary{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo-name">
+      <img src="image10.png" alt="Keep it Healthy Logo">
+      <h1>Keep it Healthy</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="about.html">About</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <div class="top">
+      <div class="left">
+        <div class="card">
+          <h2>Daily Entry</h2>
+          <div class="muted">Add today's data — first day always.</div>
+          <form class="entry-form" id="entryForm">
+            <label>Day</label>
+            <input type="number" id="day" min="1" max="30" value="1" required>
+
+            <label>Date</label>
+            <input type="date" id="date" required>
+
+            <label>Weight (kg)</label>
+            <input type="number" id="weight" step="0.1" required>
+
+            <label>Calories Burned</label>
+            <input type="number" id="burned" required placeholder="Total Calories Burned">
+
+            <div class="actions">
+              <button class="btn" type="submit">Save Entry</button>
+              <button type="button" id="resetBtn" class="small">Reset Data</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Day Cards</h2>
+          <div class="muted">Your daily logs will appear here.</div>
+          <div id="dayGrid" class="day-grid"></div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="card">
+          <h2>Monthly Snapshot</h2>
+          <div class="muted">Quick numbers updated live.</div>
+          <div class="summary">
+            <div class="card" style="padding:12px;text-align:left">
+              <div class="muted">Latest Weight</div>
+              <div id="latestWeight" style="font-size:1.3rem;font-weight:800">— kg</div>
+            </div>
+
+            <div class="card" style="padding:12px;text-align:left">
+              <div class="muted">Total Burned (month)</div>
+              <div id="totalBurn" style="font-size:1.3rem;font-weight:800">— kcal</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Badges & Gamification</h2>
+          <div class="muted">Earn badges for consistency.</div>
+          <div id="badges" class="badges" style="margin-top:12px"></div>
+        </div>
+
+        <div class="card">
+          <h2>Tip of the Day</h2>
+          <div id="tipBox" style="margin-top:8px;font-weight:700">—</div>
+        </div>
+
+        <div class="card">
+          <h2>Charts</h2>
+          <div class="charts">
+            <canvas id="weightChart"></canvas>
+            <canvas id="calChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+      <img src="image10.png" alt="Keep it Healthy Logo">
+      <h2>Keep it Healthy</h2>
+      <p>Empowering your journey to a healthier lifestyle.</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2025 Keep it Healthy. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const STORAGE_KEY = 'kih_pro_progress_v4';
+    let data = Array(30).fill(null);
+    const dayGrid = document.getElementById('dayGrid');
+
+    function renderDayCards(){
+      dayGrid.innerHTML = '';
+      data.forEach((entry, idx)=>{
+        if(!entry) return;
+        const div = document.createElement('div');
+        div.className = 'day-card card';
+        div.innerHTML = `
+          <div class="day-top">
+            <div><strong>Day ${idx+1}</strong><div class="muted">${entry.date}</div></div>
+          </div>
+          <div style="display:flex;gap:10px">
+            <div style="flex:1"><div class="muted">Weight</div><div style="font-weight:800">${entry.weight} kg</div></div>
+            <div style="flex:1"><div class="muted">Calories Burned</div><div style="font-weight:800">${entry.burned}</div></div>
+          </div>
+        `;
+        dayGrid.appendChild(div);
+      });
+      updateSnapshot();
+      updateBadges();
+      renderCharts();
+    }
+
+    function updateSnapshot(){
+      const filled = data.filter(Boolean);
+      if(filled.length===0){
+        document.getElementById('latestWeight').textContent = '— kg';
+        document.getElementById('totalBurn').textContent = '— kcal';
+        return;
+      }
+      const latest = filled[filled.length-1];
+      document.getElementById('latestWeight').textContent = latest.weight + ' kg';
+      const totalBurn = filled.reduce((a,b)=>a+b.burned,0);
+      document.getElementById('totalBurn').textContent = totalBurn + ' kcal';
+    }
+
+    function updateBadges(){
+      const wrap = document.getElementById('badges');
+      wrap.innerHTML='';
+      const filled = data.filter(Boolean);
+      if(filled.length>=7) wrap.innerHTML+='<div class="badge-item">🏅 1-Week Consistency</div>';
+    }
+
+    let weightChart, calChart;
+    function renderCharts(){
+      const filled = data.filter(Boolean);
+      const labels = filled.map((e,i)=>'Day '+(i+1));
+      const weights = filled.map(e=>e.weight);
+      const burned = filled.map(e=>e.burned);
+      if(weightChart) weightChart.destroy();
+      if(calChart) calChart.destroy();
+      weightChart = new Chart(document.getElementById('weightChart').getContext('2d'),{
+        type:'line',
+        data:{labels,datasets:[{label:'Weight (kg)',data:weights,borderColor:'#4CAF50',fill:false,tension:0.3}]},
+        options:{responsive:true,scales:{y:{beginAtZero:false}}}
+      });
+      calChart = new Chart(document.getElementById('calChart').getContext('2d'),{
+        type:'bar',
+        data:{labels,datasets:[{label:'Calories Burned',data:burned,backgroundColor:'rgba(255,152,0,0.6)'}]},
+        options:{responsive:true}
+      });
+    }
+
+    document.getElementById('entryForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const day = parseInt(document.getElementById('day').value)-1;
+      const entry = {
+        date: document.getElementById('date').value,
+        weight: parseFloat(document.getElementById('weight').value),
+        burned: parseInt(document.getElementById('burned').value)
+      };
+      data[day]=entry;
+      renderDayCards();
+      e.target.reset();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click',()=>{
+      if(confirm('Reset all progress data?')){
+        data = Array(30).fill(null);
+        renderDayCards();
+      }
+    });
+
+    renderDayCards();
+  </script>
+</body>
+</html>

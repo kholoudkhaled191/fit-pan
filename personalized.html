@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keep it Healthy | Personalized Plan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      /* ضع رابط صورتك هنا */
+      background: url('risen-wang-20jX9b35r_M-unsplash.jpg') no-repeat center center fixed;
+    }
+
+    /* Navbar */
+    header {
+      background-color: #4CAF50;
+      /* background: url('risen-wang-20jX9b35r_M-unsplash.jpg') no-repeat center center fixed; */
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header img.logo {
+      height: 50px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: white;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Personalized Plan Section */
+    .plan-section {
+      flex: 1;
+      background: rgba(255,255,255,0.95);
+      padding: 60px 20px;
+      text-align: center;
+      margin: 20px auto;
+      border-radius: 12px;
+      max-width: 700px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    .plan-section h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #4CAF50;
+    }
+    .diet-form {
+      max-width: 600px;
+      margin: 0 auto 20px;
+      text-align: left;
+    }
+    .diet-form label {
+      display: block;
+      margin-top: 10px;
+    }
+    .diet-form input, .diet-form select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .btn {
+      background-color: #FF9800;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      margin-top: 15px;
+      display: inline-block;
+    }
+    .btn:hover {
+      background-color: #e68900;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #subscribe-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    footer img {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    footer h2 {
+      margin: 5px 0;
+    }
+    footer p {
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+    footer .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    footer .social-icons a:hover {
+      color: #FF9800;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo-name">
+      <img src="image10.png" alt="Keep it Healthy Logo" class="logo">
+      <h1>Keep it Healthy</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="features.html">Features</a>
+      <a href="about.html">About</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Personalized Plan Section -->
+  <section class="plan-section">
+    <h2>Personalized Calorie Plan</h2>
+    <form class="diet-form">
+      <label>Age <input type="number" id="age" required></label>
+      <label>Gender 
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </label>
+      <label>Height (cm) <input type="number" id="height" required></label>
+      <label>Weight (kg) <input type="number" id="weight" required></label>
+      <label>Goal 
+        <select id="goal">
+          <option value="lose">Lose Weight</option>
+          <option value="gain">Gain Weight</option>
+          <option value="maintain">Maintain</option>
+        </select>
+      </label>
+      <label>Activity Level 
+        <select id="activity">
+          <option value="1.2">Sedentary</option>
+          <option value="1.375">Lightly Active</option>
+          <option value="1.55">Moderately Active</option>
+          <option value="1.725">Very Active</option>
+        </select>
+      </label>
+      <button type="button" class="btn" onclick="generatePlan()">Calculate Calories</button>
+    </form>
+
+    <div class="results" id="results"></div>
+    <div id="subscribe-container"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+      <img src="image10.png" alt="Keep it Healthy Logo">
+      <h2>Keep it Healthy</h2>
+      <p>Empowering your journey to a healthier lifestyle.</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+      <p>&copy; 2025 Keep it Healthy. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function generatePlan() {
+      const age = document.getElementById('age').value;
+      const gender = document.getElementById('gender').value;
+      const height = document.getElementById('height').value;
+      const weight = document.getElementById('weight').value;
+      const goal = document.getElementById('goal').value;
+      const activity = parseFloat(document.getElementById('activity').value);
+
+      if (!age || !height || !weight) {
+        alert("Please fill all fields");
+        return;
+      }
+
+      let bmr = (gender === "male")
+        ? 10 * weight + 6.25 * height - 5 * age + 5
+        : 10 * weight + 6.25 * height - 5 * age - 161;
+
+      let calories = bmr * activity;
+      if (goal === "lose") calories -= 500;
+      if (goal === "gain") calories += 500;
+
+      const protein = (calories * 0.3 / 4).toFixed(0);
+      const carbs = (calories * 0.4 / 4).toFixed(0);
+      const fats = (calories * 0.3 / 9).toFixed(0);
+
+      document.getElementById("results").innerHTML = `
+        <h3>Your Daily Plan</h3>
+        <p><strong>Calories:</strong> ${calories.toFixed(0)} kcal</p>
+        <p><strong>Macros:</strong> Protein: ${protein} g | Carbs: ${carbs} g | Fats: ${fats} g</p>
+      `;
+
+      document.getElementById("subscribe-container").innerHTML = `
+        <a href="subscription.html" class="btn">Subscribe Now</a>
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Keep it Healthy</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
+header { background:#4CAF50; color:white; padding:15px; text-align:center; }
+.container { max-width:900px; margin:20px auto; background:white; padding:20px; border-radius:10px; }
+input[type=number] { padding:10px; width:120px; }
+button { padding:10px 20px; background:#FF9800; color:white; border:none; border-radius:8px; cursor:pointer; }
+button:hover { background:#e68900; }
+.meal-card { background:#e8f5e9; margin:10px 0; padding:15px; border-radius:8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dashboard - Keep it Healthy</h1>
+</header>
+
+<div class="container">
+  <h2>AI Meal Generator</h2>
+  <label>Calories for today: <input type="number" id="calories" placeholder="e.g. 2000"></label>
+  <button onclick="generateMealPlan()">Generate Meal Plan</button>
+
+  <div id="mealPlan" style="margin-top:20px;"></div>
+</div>
+
+<script>
+const userId = "user123"; // مثال على user_id ثابت، ممكن تجيبي من session
+
+async function generateMealPlan() {
+  const calories = document.getElementById('calories').value;
+  if(!calories) { alert("Enter calories"); return; }
+
+  const res = await fetch('/generate', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({user_id: userId, calories})
+  });
+
+  const data = await res.json();
+
+  const mealDiv = document.getElementById('mealPlan');
+  mealDiv.innerHTML = `
+    <div class="meal-card"><strong>Breakfast:</strong> ${data.breakfast.item} - ${data.breakfast.calories} cal</div>
+    <div class="meal-card"><strong>Lunch:</strong> ${data.lunch.item} - ${data.lunch.calories} cal</div>
+    <div class="meal-card"><strong>Dinner:</strong> ${data.dinner.item} - ${data.dinner.calories} cal</div>
+  `;
+}
+</script>
+</body>
+</html> -->
